@@ -1,0 +1,90 @@
+/* Some styles for my crap snake game */
+
+/*Colors:
+dark grey:  393D3F
+white:      FDFDFF
+snake-green C4F1BE
+back-red    D3AB9E
+orange:     BF4E30
+*/
+
+/* Webpage */
+body {
+    background-color: #393D3F;
+}
+h1, h2, h3, h4, h5, h6, p {
+    color: #FDFDFF;
+}
+.main {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.speedbutton {
+    display: inline-block;
+    text-align: center;
+    background-color: #BF4E30;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+}
+
+.speedbutton p {
+    display: inline;
+    font-size: 2em;
+}
+
+/* Game Box */
+
+.gamebox {
+    width: 582px;
+    height: 600px;
+}
+
+.gamearea {
+    padding: 5px;
+    width: 582px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.resetbtn {
+    background-color: #BF4E30;
+    color: #C4F1BE;
+    font-size: 3em;
+    margin: 0 0 0 0;
+    display: inline-block;
+    text-align: center;
+    width: 49%;
+    border-radius: 10px;
+}
+
+.scoreboard {
+    color: #BF4E30;
+    font-size: 3em;
+    margin: 0 0 0 0;
+    display: inline-block;
+    text-align: right;
+    width: 49%;
+}
+
+div div div {
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.openspace {
+    background-color: #D3AB9E;
+}
+
+.snakehead {
+    background-color: #C4F1BE;
+    border-radius: 50% 0 0 50%;
+}
+
+.snakebody {
+    background-color: #C4F1BE;
+}
