@@ -399,21 +399,36 @@ var snakesnake = false;
 // Event Listeners
 window.addEventListener("keydown", function() {if (!isInPlay) {gameStarter();}});
 window.addEventListener("keypress", function(key) {if (isInPlay) {changeDirection(key);}});
-window.addEventListener("touchstart", function(event) {
+
+// Add touch support only to the game area for swipes
+const gameArea = document.querySelector('.gamearea');
+gameArea.addEventListener("touchstart", function(event) {
     event.preventDefault();
     if (!isInPlay) {gameStarter();}
     handleTouchStart(event);
 });
-window.addEventListener("touchend", function(event) {
+gameArea.addEventListener("touchend", function(event) {
     event.preventDefault();
     if (isInPlay) {handleTouchEnd(event);}
 });
+
 RESET.addEventListener("click", function() {resetGame();});
+RESET.addEventListener("touchend", function() {resetGame();});
+
 DIFF1.addEventListener("click", function() {setDifficulty(DIFF1);});
+DIFF1.addEventListener("touchend", function() {setDifficulty(DIFF1);});
+
 DIFF2.addEventListener("click", function() {setDifficulty(DIFF2);});
+DIFF2.addEventListener("touchend", function() {setDifficulty(DIFF2);});
+
 DIFF3.addEventListener("click", function() {setDifficulty(DIFF3);});
+DIFF3.addEventListener("touchend", function() {setDifficulty(DIFF3);});
+
 DIFF4.addEventListener("click", function() {setDifficulty(DIFF4);});
+DIFF4.addEventListener("touchend", function() {setDifficulty(DIFF4);});
+
 DIFF5.addEventListener("click", function() {setDifficulty(DIFF5);});
+DIFF5.addEventListener("touchend", function() {setDifficulty(DIFF5);});
 
 // Initialize the game
 resetGame();

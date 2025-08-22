@@ -6,8 +6,8 @@
 </head>
 <body>
 <div class="main">
-    <h1>Snake Game - A JavaScript Learning Project</h1>
-    <p>A classic snake game built from scratch to practice web development fundamentals. Use WASD keys or swipe on mobile to control the snake!</p>
+    <h1>Snake Game</h1>
+    <p>A classic snake game built from scratch to practice web development fundamentals with JavaScript and CSS. Use WASD keys or swipe to control the snake. Touch a key to begin!</p>
     <h2>Play Game!</h2>
     <p class="gametext">Select Difficulty:</p>
         <div class="speedbutton diff1"><p>1</p></div>
@@ -15,7 +15,6 @@
         <div class="speedbutton diff3"><p>3</p></div>
         <div class="speedbutton diff4"><p>4</p></div>
         <div class="speedbutton diff5"><p>5</p></div>
-    <p class="gametext">Use WASD keys to navigate (or swipe on mobile). Press any key to begin!</p>
     <div class="gamebox">
         <div class="gamearea">
             <div class="openspace"></div>
@@ -139,19 +138,23 @@
             <div class="openspace"></div>
             <div class="openspace"></div>
         </div>
-        <p class="resetbtn">Reset</p>
-        <p class="scoreboard">Points: 000</p>
+        <div class="game-controls">
+            <p class="resetbtn">Reset</p>
+            <p class="scoreboard">Points: 000</p>
+        </div>
     </div>
-    <h2>How to Play</h2>
-    <p><strong>Goal:</strong> Control the snake to eat red apples and grow as long as possible without hitting the walls or yourself!</p>
-    <p><strong>Controls:</strong></p>
-    <ul>
-        <li><strong>Desktop:</strong> Use W, A, S, D keys to move up, left, down, right</li>
-        <li><strong>Mobile:</strong> Swipe in the direction you want to move</li>
-        <li><strong>Start:</strong> Press any key or tap the screen to begin</li>
-        <li><strong>Reset:</strong> Click the "Reset" button to start over</li>
-    </ul>
-    <p><strong>Difficulty:</strong> Higher numbers mean faster snake movement. Good luck!</p>
+    <details class="instructions">
+        <summary><h2>How to Play</h2></summary>
+        <p><strong>Goal:</strong> Control the snake to eat red apples and grow as long as possible without hitting the walls or yourself!</p>
+        <p><strong>Controls:</strong></p>
+        <ul>
+            <li><strong>Desktop:</strong> Use W, A, S, D keys to move up, left, down, right</li>
+            <li><strong>Mobile:</strong> Swipe in the direction you want to move</li>
+            <li><strong>Start:</strong> Press any key or tap the screen to begin</li>
+            <li><strong>Reset:</strong> Click the "Reset" button to start over</li>
+        </ul>
+        <p><strong>Difficulty:</strong> Higher numbers mean faster snake movement. Good luck!</p>
+    </details>
 </div>
 </body>
 <script src="script.js"></script>
