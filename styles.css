@@ -80,6 +80,11 @@ div div div {
     background-color: #D3AB9E;
 }
 
+.apple {
+    background-color: #BF4E30;
+    border-radius: 50%;
+}
+
 .snakehead {
     background-color: #C4F1BE;
     border-radius: 50% 0 0 50%;

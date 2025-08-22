@@ -2,7 +2,7 @@
 
 function setRowColVals(abox,i) {
     var row = Math.floor(i/COLUMNS);
-    var col = i - 12*row
+    var col = i - COLUMNS*row
     abox.setAttribute("row",row);
     abox.setAttribute("col",col);
 }
@@ -73,10 +73,50 @@ function setBoxOpen(row,col) {
 }
 
 function checkApple() {
-    if (Math.random()<0.75) {
-        return false;
-    } else {
+    // Check if the snake head is at the apple position
+    if (newsnake[0][0] == appleRow && newsnake[0][1] == appleCol) {
         return true;
+    } else {
+        return false;
+    }
+}
+
+function placeApple() {
+    // Remove previous apple if it exists
+    if (appleRow >= 0 && appleCol >= 0) {
+        var oldApple = getABox(appleRow, appleCol);
+        if (oldApple && oldApple.getAttribute("class") == "apple") {
+            makeOpenSpace(oldApple);
+        }
+    }
+    
+    // Find a random empty spot for the apple
+    var emptySpots = [];
+    for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLUMNS; c++) {
+            var box = getABox(r, c);
+            if (box && box.getAttribute("class") == "openspace") {
+                // Make sure it's not occupied by snake
+                var isSnakePos = false;
+                for (var s = 0; s < newsnake.length; s++) {
+                    if (newsnake[s][0] == r && newsnake[s][1] == c) {
+                        isSnakePos = true;
+                        break;
+                    }
+                }
+                if (!isSnakePos) {
+                    emptySpots.push([r, c]);
+                }
+            }
+        }
+    }
+    
+    if (emptySpots.length > 0) {
+        var randomIndex = Math.floor(Math.random() * emptySpots.length);
+        appleRow = emptySpots[randomIndex][0];
+        appleCol = emptySpots[randomIndex][1];
+        var appleBox = getABox(appleRow, appleCol);
+        appleBox.setAttribute("class", "apple");
     }
 }
 function checkOOB() {
@@ -87,10 +127,11 @@ function checkOOB() {
 function checkSS() {
     var i;
     for (i=1 ; i<newsnake.length ; ++i) {
-        if (newsnake[0]==newsnake[i]) {
+        if (newsnake[0][0]==newsnake[i][0] && newsnake[0][1]==newsnake[i][1]) {
             return true;
-        } else {return false;}
-    } 
+        }
+    }
+    return false;
 }
 function countdown0() {
     setTimeout(function() {
@@ -143,6 +184,10 @@ function countdown3() {
         if (isInPlay) {countdown2();}
     },1000);
 }
+function updateScore() {
+    var scoreText = "Points: " + points.toString().padStart(3, '0');
+    SCORE.textContent = scoreText;
+}
 function gameStarter() {
     isInPlay=true;
     setTimeout(function() {
@@ -179,7 +224,10 @@ function resetGame() {
     makeSnakeHead(starthead);
     makeSnakeBody(startbody);
     points = 0;
-    apple = false;
+    updateScore();
+    appleRow = -1;
+    appleCol = -1;
+    placeApple();
 }
 function setDifficulty(btn) {
     if (difficulty==1) {
@@ -220,16 +268,25 @@ function intStep() {
     } else { // if (dir=="w")
         newsnake.splice(0,0,[parseInt(oldsnake[0][0],10)-1,parseInt(oldsnake[0][1],10)]);
     }
-    var apple = checkApple(); // just check if newsnake[0] is an apple
     var outofbounds = checkOOB();
     var snakesnake = checkSS();
     if (outofbounds || snakesnake) {
         gameOver();
+        return;
     }
-    if (!apple) {
+    
+    var apple = checkApple();
+    if (apple) {
+        // Snake ate apple - increase score and place new apple
+        points += 10;
+        updateScore();
+        placeApple();
+    } else {
+        // No apple eaten - remove tail
         var snakecopy = newsnake.splice(-1,1);
         makeOpenSpace(getABox(snakecopy[0][0],snakecopy[0][1]));
     }
+    
     var bodycopy = newsnake.slice();
     var i; for (i=1 ; i<bodycopy.length ; ++i) {
         makeSnakeBody(getABox(bodycopy[i][0],bodycopy[i][1]));
@@ -287,7 +344,8 @@ var points = 0;
 var oldsnake = getOldSnake();
 firstround = true;
 var newsnake = oldsnake.slice();
-var apple = false;
+var appleRow = -1;
+var appleCol = -1;
 var outofbounds = false;
 var snakesnake = false;
 
@@ -300,4 +358,7 @@ DIFF2.addEventListener("click", function() {setDifficulty(DIFF2);});
 DIFF3.addEventListener("click", function() {setDifficulty(DIFF3);});
 DIFF4.addEventListener("click", function() {setDifficulty(DIFF4);});
 DIFF5.addEventListener("click", function() {setDifficulty(DIFF5);});
+
+// Initialize the game
+resetGame();
 
