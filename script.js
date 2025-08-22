@@ -1,3 +1,50 @@
+// Touch handling for mobile
+var touchStartX = 0;
+var touchStartY = 0;
+var touchEndX = 0;
+var touchEndY = 0;
+
+function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchEnd(event) {
+    touchEndX = event.changedTouches[0].clientX;
+    touchEndY = event.changedTouches[0].clientY;
+    handleSwipe();
+}
+
+function handleSwipe() {
+    var deltaX = touchEndX - touchStartX;
+    var deltaY = touchEndY - touchStartY;
+    var minSwipeDistance = 30; // Minimum distance for a swipe
+    
+    if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) {
+        return; // Not a swipe, ignore
+    }
+    
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > 0 && lastDir != "a") {
+            nextDir = "d"; // Swipe right
+        } else if (deltaX < 0 && lastDir != "d") {
+            nextDir = "a"; // Swipe left
+        }
+    } else {
+        // Vertical swipe
+        if (deltaY > 0 && lastDir != "w") {
+            nextDir = "s"; // Swipe down
+        } else if (deltaY < 0 && lastDir != "s") {
+            nextDir = "w"; // Swipe up
+        }
+    }
+    
+    if (isInPlay) {
+        setHeadFacing(document.querySelector(".gamearea div[row=\"" + newsnake[0][0] + "\"][col=\"" + newsnake[0][1] + "\"]"), nextDir);
+    }
+}
+
 // Define Functions
 
 function setRowColVals(abox,i) {
@@ -352,6 +399,15 @@ var snakesnake = false;
 // Event Listeners
 window.addEventListener("keydown", function() {if (!isInPlay) {gameStarter();}});
 window.addEventListener("keypress", function(key) {if (isInPlay) {changeDirection(key);}});
+window.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    if (!isInPlay) {gameStarter();}
+    handleTouchStart(event);
+});
+window.addEventListener("touchend", function(event) {
+    event.preventDefault();
+    if (isInPlay) {handleTouchEnd(event);}
+});
 RESET.addEventListener("click", function() {resetGame();});
 DIFF1.addEventListener("click", function() {setDifficulty(DIFF1);});
 DIFF2.addEventListener("click", function() {setDifficulty(DIFF2);});

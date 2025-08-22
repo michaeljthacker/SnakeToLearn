@@ -1,4 +1,4 @@
-/* Some styles for my crap snake game */
+/* Some styles for my snake game */
 
 /*Colors:
 dark grey:  393D3F
@@ -11,6 +11,15 @@ orange:     BF4E30
 /* Webpage */
 body {
     background-color: #393D3F;
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 h1, h2, h3, h4, h5, h6, p {
     color: #FDFDFF;
@@ -20,6 +29,11 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0 auto;
 }
 
+ul {
+    color: #FDFDFF;
+    text-align: left;
+}
+
 .speedbutton {
     display: inline-block;
     text-align: center;
@@ -27,46 +41,84 @@ h1, h2, h3, h4, h5, h6, p {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-
+    margin: 5px;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .speedbutton p {
     display: inline;
     font-size: 2em;
+    margin: 0;
+    line-height: 40px;
 }
 
 /* Game Box */
 
 .gamebox {
-    width: 582px;
-    height: 600px;
+    width: 100%;
+    max-width: 582px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .gamearea {
     padding: 5px;
-    width: 582px;
+    width: 100%;
+    max-width: 582px;
     height: 500px;
     margin: 0 auto;
+    touch-action: none;
 }
 
 .resetbtn {
     background-color: #BF4E30;
     color: #C4F1BE;
-    font-size: 3em;
+    font-size: 2.5em;
     margin: 0 0 0 0;
     display: inline-block;
     text-align: center;
     width: 49%;
     border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .scoreboard {
     color: #BF4E30;
-    font-size: 3em;
+    font-size: 2.5em;
     margin: 0 0 0 0;
     display: inline-block;
     text-align: right;
     width: 49%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .main {
+        padding: 0 10px;
+    }
+    
+    .gamebox {
+        width: 100%;
+    }
+    
+    .gamearea {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 12/10;
+    }
+    
+    .resetbtn, .scoreboard {
+        font-size: 2em;
+    }
+    
+    div div div {
+        width: calc((100% - 24px) / 12 - 4px);
+        height: calc((100% - 20px) / 10 - 4px);
+        min-width: 20px;
+        min-height: 20px;
+    }
 }
 
 div div div {
