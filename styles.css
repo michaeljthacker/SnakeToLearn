@@ -1,4 +1,4 @@
-/* Some styles for my crap snake game */
+/* Some styles for my snake game */
 
 /*Colors:
 dark grey:  393D3F
@@ -11,6 +11,16 @@ orange:     BF4E30
 /* Webpage */
 body {
     background-color: #393D3F;
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6, p {
     color: #FDFDFF;
@@ -20,6 +30,11 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0 auto;
 }
 
+ul {
+    color: #FDFDFF;
+    text-align: left;
+}
+
 .speedbutton {
     display: inline-block;
     text-align: center;
@@ -27,57 +42,229 @@ h1, h2, h3, h4, h5, h6, p {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-
+    margin: 5px;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .speedbutton p {
     display: inline;
     font-size: 2em;
+    margin: 0;
+    line-height: 40px;
 }
 
 /* Game Box */
 
 .gamebox {
-    width: 582px;
-    height: 600px;
+    width: 480px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .gamearea {
     padding: 5px;
-    width: 582px;
-    height: 500px;
+    width: 480px;
+    height: 400px;
     margin: 0 auto;
+    touch-action: none;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 2px;
+    background-color: #393D3F;
+    border: 2px solid #BF4E30;
 }
 
 .resetbtn {
     background-color: #BF4E30;
     color: #C4F1BE;
-    font-size: 3em;
-    margin: 0 0 0 0;
-    display: inline-block;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    width: 49%;
+    width: 48%;
     border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    line-height: 1;
+    height: 100%;
 }
 
 .scoreboard {
     color: #BF4E30;
-    font-size: 3em;
-    margin: 0 0 0 0;
-    display: inline-block;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     text-align: right;
-    width: 49%;
+    width: 48%;
+    box-sizing: border-box;
+    line-height: 1;
+    height: 100%;
+}
+
+.game-controls {
+    width: 100%;
+    margin-top: 5px;
+    clear: both;
+    overflow: hidden;
+    line-height: 1;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.instructions {
+    margin: 10px 0;
+}
+
+.instructions summary {
+    cursor: pointer;
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.instructions summary::-webkit-details-marker {
+    display: none;
+}
+
+.instructions summary h2 {
+    display: inline;
+    margin: 0;
+}
+
+.instructions summary::before {
+    content: "[+] ";
+    color: #BF4E30;
+    font-weight: bold;
+}
+
+.instructions[open] summary::before {
+    content: "[-] ";
 }
 
 div div div {
-    width: 40px;
-    height: 40px;
-    margin: 2px;
-    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: 1/1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 700px) {
+    body {
+        padding: 5px;
+        font-size: 14px;
+        overflow-x: hidden;
+    }
+    
+    .main {
+        padding: 0 5px;
+        max-width: 100%;
+    }
+    
+    h1 {
+        font-size: 1.3em;
+        margin: 5px 0;
+    }
+    
+    h2 {
+        font-size: 1.1em;
+        margin: 8px 0 5px 0;
+    }
+    
+    p, li {
+        font-size: 0.85em;
+        margin: 3px 0;
+    }
+    
+    .gametext {
+        font-size: 0.9em;
+        margin: 5px 0 3px 0;
+    }
+    
+    .speedbutton {
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+    }
+    
+    .speedbutton p {
+        font-size: 1.2em;
+        line-height: 30px;
+    }
+    
+    .gamebox {
+        width: 100%;
+        margin: 5px auto 10px auto;
+        clear: both;
+    }
+    
+    .gamearea {
+        width: 90vw;
+        max-width: 360px;
+        height: auto;
+        padding: 2px;
+        margin: 3px auto;
+        aspect-ratio: 12/10;
+    }
+    
+    .game-controls {
+        margin-top: 3px;
+        clear: both;
+        height: 40px;
+    }
+    
+    .resetbtn, .scoreboard {
+        font-size: 1.1em;
+        padding: 6px 8px;
+        margin: 0;
+        width: 48%;
+        line-height: 1;
+        height: 100%;
+    }
+    
+    .instructions {
+        margin-top: 10px;
+        clear: both;
+    }
+    
+    .instructions summary {
+        margin-bottom: 5px;
+    }
+    
+    ul {
+        padding-left: 15px;
+        margin: 5px 0;
+    }
+    
+    li {
+        margin: 2px 0;
+    }
 }
 
 .openspace {
     background-color: #D3AB9E;
+}
+
+.apple {
+    background-color: #BF4E30;
+    border-radius: 50%;
 }
 
 .snakehead {
