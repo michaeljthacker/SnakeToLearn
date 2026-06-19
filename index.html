@@ -157,5 +157,11 @@
     </details>
 </div>
 </body>
+<script type="module">
+    import { init, pageView, track } from 'https://analytics.mjt.pub/analytics.js';
+    init({ site: 'snake.mjt.pub', writeKey: 'htb2LQmdYzOtUofWGVt7WjXGLiNf9yfgHMPEDYqPXiE' });
+    pageView();
+    window.mjtAnalytics = { init, pageView, track };
+</script>
 <script src="script.js"></script>
 </html>

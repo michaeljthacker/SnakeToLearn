@@ -235,14 +235,23 @@ function updateScore() {
     var scoreText = "Points: " + points.toString().padStart(3, '0');
     SCORE.textContent = scoreText;
 }
+function trackEvent(action, state) {
+    try {
+        if (window.mjtAnalytics && window.mjtAnalytics.track) {
+            window.mjtAnalytics.track(action, { state: state });
+        }
+    } catch (e) {}
+}
 function gameStarter() {
     isInPlay=true;
+    trackEvent("game_start", { difficulty: difficulty });
     setTimeout(function() {
         if (isInPlay) {countdown3();}
     },500);
 }
 function gameOver() {
     console.log("Its here");
+    trackEvent("game_end", { difficulty: difficulty, score: points });
     clearInterval(interval);
     interval=null;
     var i,j;
